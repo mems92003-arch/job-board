@@ -9,6 +9,6 @@ class post extends Model
     
     protected $fillable = ['title','body','published'];
 
-    ptotected $guarded = ['id'];
+    protected $guarded = ['id'];
 
 }
