@@ -9,7 +9,7 @@ class PostController extends Controller
 {
     function index(){
         // Eloquent ORM -> Get all data
-        $data = Post::all();
+        $data = Post::cursorPaginate(5);
 
 
         // pass the data to the view
@@ -27,13 +27,19 @@ class PostController extends Controller
 
 
     function create(){
-        $post = Post::create([
-            'title' => 'My frist post',
-            'body' => 'This is my content',
-            'aouthor' => 'Ayman',
-            'published' => true
-        ]);
+        // $post = Post::create([
+        //     'title' => 'My frist post',
+        //     'body' => 'This is my content',
+        //     'published' => true
+        // ]);
+
+        Post::factory(100)->create();
 
         return redirect('/blog');
+    }
+
+
+    function delete(){
+        Post::destroy(1);
     }
 }

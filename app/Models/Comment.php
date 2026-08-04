@@ -1,32 +1,27 @@
 <?php
 
 namespace App\Models;
-
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Post extends Model
+class Comment extends Model
 {
     use HasFactory;
+
     use HasUuids ;
+
     protected $primaryKey = 'id';
 
     protected $KeyType = 'string';
 
     public $incremernting = false ;
-    protected $table = 'post';
-    
-    protected $fillable = ['title','body','published'];
-
     protected $guarded = ['id'];
+    protected $table = 'comments';
+    protected $fillable = ['author','content','post_id'];
 
-    public function comments(){
-        return $this->hasMany(Comment::class);
+    public function post()
+    {
+        return $this->belongsTo(Post::class);
     }
-
-    public function tags(){
-        return $this->belongsToMany(Tag::class);
-    }
-
 }
