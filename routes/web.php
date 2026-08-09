@@ -2,22 +2,21 @@
 
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JobController;
 
-Route::get('/',[indexController::class,'index']);
-Route::get('/about',[indexController::class,'about']);
-Route::get('/contact',[indexController::class,'contact']);
+Route::get('/',indexController::class);
+Route::get('/about',AboutController::class);
+Route::get('/contact',ContactController::class);
+
+
 Route::get('/job',[JobController::class,'index']);
-Route::get('/blog',[PostController::class,'index']);
-Route::get('/blog/create',[PostController::class,'create']);
-Route::get('/blog/delete',[PostController::class,'delete']);
-Route::get('/blog/{id}',[PostController::class,'show']);
 
-Route::get('/comments',[CommentController::class,'index']);
-Route::get('/comments/create',[CommentController::class,'create']);
 
-Route::get('/tags',[TagController::class,'index']);
-Route::get('/tags/create',[TagController::class,'create']);
+Route::resource('blog',PostController::class);
+Route::resource('comments',CommentController::class);
+Route::resource('tags',TagController::class);

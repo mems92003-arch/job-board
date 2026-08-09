@@ -1,40 +1,72 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Comment;
+
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
-    function index(){ 
-        // Eloquent ORM -> Get all data
-        $date = Comment::all();
-
-
-        // pass the data to the view
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+         $date = Comment::all();
         return view('comment.index',['comments' => $date,'pageTitle' => 'Blog']);
 
     }
 
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        return view('comment.create',['pageTitle' => 'Blog - Create New Comment']);
+    }
 
-    function show($id){
-        $comment = Comment::findOrFail($id);
-        return view('comment.show',['comment' => $comment,'pageTitle' => $comment->title]);
-        
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        // @TODO : this will be completed in form section
 
     }
 
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        // @TODO : this will be completed in form section
 
-    function create(){
-        // Comment::create([            
-        //     'author' => 'Ayman',
-        //     'content' => 'This is a test comment',
-        //     'post_id' => true
-        // ]);
+    }
 
-        Comment::factory(100)->create();
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        return view('comment.edit',['pageTitle' => 'Blog - Edit Comment']);
 
-        return redirect('/comments');
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        // @TODO : this will be completed in form section
+
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        // @TODO : this will be completed in form section
+
     }
 }
