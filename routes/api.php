@@ -1,11 +1,12 @@
 <?php
 
+use App\Http\Controllers\api\v1\AuthController;
 use App\Http\Controllers\api\v1\PostApiController;
 
 // use App\Http\Controllers\CommentController;
 // use App\Http\Controllers\PostController;
 // use App\Http\Controllers\TagController;
-// use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Route;
 
 
  //REST API , RESTfull API => HTTP Standered
@@ -17,5 +18,19 @@ use App\Http\Controllers\api\v1\PostApiController;
 
 
 Route::prefix('v1')->group(function () {
+    
+
     Route::apiResource('post',PostApiController::class);
+    
+
+    Route::prefix('auth')->group(function(){
+        Route::post('login',[AuthController::class, 'login']);
+        Route::post('refresh',[AuthController::class,'refresh']);
+
+
+        Route::middleware('auth:api')->group(function(){
+            Route::get('me',[AuthController::class,'me']);
+            Route::post('logout',[AuthController::class,'logout']);
+        });
+    });
 });
